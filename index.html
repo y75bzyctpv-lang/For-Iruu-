@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For My Dearest Iruu ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --bg: #fff5f7;
+      --primary: #e0667e;
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --text: #4a3b32;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(180deg, #ffeef2 0%, #fff5f7 50%, #f7e8ee 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 70px;
+    }
+
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 240, 243, 0.98);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .gate-card {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(224, 102, 126, 0.2);
+      border: 2px dashed #f8b4c4;
+      max-width: 360px;
+      width: 100%;
+    }
+    .gate-btn {
+      background: linear-gradient(135deg, #e0667e, #f28b9f);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 6px 20px rgba(224, 102, 126, 0.4);
+      animation: pulse 1.6s infinite;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 15px;
+    }
+    .header h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.9rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .header p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(224, 102, 126, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .card-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.85rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .music-container iframe {
+      width: 100%;
+      height: 152px;
+      border-radius: 14px;
+      border: none;
+    }
+
+    .envelope-box {
+      text-align: center;
+      cursor: pointer;
+      padding: 22px 10px;
+      background: #fff0f3;
+      border-radius: 16px;
+      border: 2px dashed #f8b4c4;
+      transition: transform 0.2s;
+    }
+    .envelope-box:active { transform: scale(0.97); }
+    .wax-seal {
+      font-size: 2.8rem;
+      margin-bottom: 6px;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    
+    .letter-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 999;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+    .letter-paper {
+      background: #fffdf9;
+      border-radius: 16px;
+      padding: 26px 20px;
+      max-height: 82vh;
+      overflow-y: auto;
+      border: 1px solid #e8dfd8;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .letter-paper h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.3rem;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .letter-paper p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 14px;
+      color: #443731;
+    }
+    .love-3000 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.2rem;
+      color: var(--primary);
+      text-align: center;
+      margin: 18px 0 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .close-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      width: 100%;
+      margin-top: 14px;
+      cursor: pointer;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .polaroid {
+      background: white;
+      padding: 10px 10px 16px 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transform: rotate(-1.5deg);
+      transition: transform 0.2s;
+    }
+    .polaroid:nth-child(even) { transform: rotate(1.5deg); }
+    .polaroid img {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #f0f0f0;
+      display: block;
+    }
+    .polaroid .caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      text-align: center;
+      margin-top: 8px;
+      color: #5d4a40;
+      line-height: 1.3;
+    }
+
+    .proposal {
+      text-align: center;
+      position: relative;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 18px;
+      position: relative;
+      height: 50px;
+    }
+    .btn-yes, .btn-no {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-yes { background: var(--primary); color: white; }
+    .btn-no { background: #e0e0e0; color: #555; position: absolute; }
+  </style>
+</head>
+<body>
+
+  <div id="gate">
+    <div class="gate-card">
+      <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
+      <h2 style="font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--primary); margin-bottom: 6px;">For Iruu</h2>
+      <p style="font-size: 0.95rem; color: #665; line-height: 1.5;">I built a little corner of the internet just for you.</p>
+      <button class="gate-btn" onclick="enterSite()">Tap to Open 💖</button>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1>Our Special Place ✨</h1>
+    <p>Every little memory with you</p>
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <div class="card-title">Our Song 🎵</div>
+      <div class="music-container">
+        <iframe id="spotifyWidget" src="https://open.spotify.com/embed/track/5iFwAOB2TFkPJk8sMlxP8g?utm_source=generator&theme=0" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">A Letter For You 💌</div>
+      <div class="envelope-box" onclick="openLetter()">
+        <div class="wax-seal">💌</div>
+        <p style="font-weight: 600; color: var(--primary);">Tap to open your letter</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Our Memories 📸</div>
+      <div class="gallery-grid">
+        
+        <div class="polaroid">
+          <img src="https://i.ibb.co/spSVKGWT/IMG-5735.jpg" alt="Memory 1">
+          <div class="caption">My safe place my home my everything💕</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/Wp3NBsbZ/IMG-5718.jpg" alt="Memory 2">
+          <div class="caption">My Muslim baddiee🥰</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/MDp39SkJ/1e8b966c-bf22-4c24-8538-d1368cd92688.jpg" alt="Memory 3">
+          <div class="caption">THE PRETTIEST WOMAN IN THE UNIVERSE🫠🫠💕</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/Kx0st90b/03-C47875-2-B48-4916-AA66-0-ECF65-F749-AC.jpg" alt="Memory 4">
+          <div class="caption">My MAHARASHTRIAN BADDIE🥰</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/mnt870P/4-DB6-DFB1-AADF-4-A44-A339-F5-D27-EA71061.jpg" alt="Memory 5">
+          <div class="caption">The thing you wrote</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/Qvmr5Dnp/45b4568a-722e-4e7f-8eff-e5c673d12718.jpg" alt="Memory 6">
+          <div class="caption">NAVRA-BAYKO?🙄💕💕🥰</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/fGHzyQrF/lp-image.jpg" alt="Memory 7">
+          <div class="caption">My sleepy Babyy🥰🥰</div>
+        </div>
+
+        <div class="polaroid">
+          <img src="https://i.ibb.co/RkD2XGkz/IMG-0324.jpg" alt="Memory 8">
+          <div class="caption">I MISS THIS DAYY SMMM🥰🥰</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card proposal">
+      <div class="card-title">One Quick Question... ☕</div>
+      <p style="font-size: 1.05rem;">Will you go on another date with me this week?</p>
+      <div class="btn-group">
+        <button class="btn-yes" onclick="sayYes()">Yes! 🥰</button>
+        <button class="btn-no" id="noBtn" onmouseover="dodge()" onclick="dodge()">No</button>
+      </div>
+      <p id="yesReply" style="margin-top: 15px; color: var(--primary); font-weight: bold; display: none;">It's a date! Can't wait! ❤️🎉</p>
+    </div>
+
+  </div>
+
+  <div class="letter-modal" id="letterModal">
+    <div class="letter-paper">
+      <h2>My Dearest Iruu,</h2>
+      <p>
+        I look at our photos and it hits me every single fucking time how lucky I am. Aadha time toh I'm just staring at you thinking, how can someone be this pretty? Every time I look at you I just forget my own name and rewrite my entire life plan.
+      </p>
+      <p>
+        Even with the faded dimples and how your real smile turns upside down, or when you're just sitting and doing nothing, or when you get thoda-sa moody—you will have my whole heart no matter what.
+      </p>
+      <p>
+        I don't just love the happy, perfect moments; I want the messy days, the days we cry, because none of that will matter as long as we're still together.
+      </p>
+      <p>
+        With everyone else I have my guard up, but with you, I don't give a fuck. I know you won't judge me; you're my safe place, my home, my everything. I'm always falling for you a little more every day.
+      </p>
+      <div class="love-3000">I LOVE YOU 3000 ❤️</div>
+      <button class="close-btn" onclick="closeLetter()">Close Letter</button>
+    </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      document.getElementById('gate').style.display = 'none';
+      confetti({ particleCount: 70, spread: 80, origin: { y: 0.5 } });
+    }
+    function openLetter() {
+      document.getElementById('letterModal').style.display = 'flex';
+      confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
+    }
+    function closeLetter() {
+      document.getElementById('letterModal').style.display = 'none';
+    }
+    function sayYes() {
+      document.getElementById('yesReply').style.display = 'block';
+      confetti({ particleCount: 160, spread: 90, origin: { y: 0.6 } });
+    }
+    function dodge() {
+      const btn = document.getElementById('noBtn');
+      const randomX = Math.floor(Math.random() * 180) - 90;
+      const randomY = Math.floor(Math.random() * 100) - 50;
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+  </script>
+</body>
+</html>
